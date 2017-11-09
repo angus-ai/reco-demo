@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Widget</title>
+    <script
+       src="https://code.jquery.com/jquery-2.1.4.js"
+       integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4="
+       crossorigin="anonymous"></script>
+    <script type="text/javascript" src="widget.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <style>
+    #camera canvas {
+    width: 100%;
+    }
+    .albumpeople {
+    height:300px;
+    }
+
+    #credentials {
+    height:100px;
+    }
+  </style>
+  <body class="container">
+
+    <div class="row">
+      <div class="col-sm-6">
+	<h2 class="text-center">Face Recognition Album</h2>
+	<div class="row albumpeople"> <!-- People1 -->
+	  <div class="col-sm-2">People 1</div>
+	  <div class="col-sm-4">
+	    <img class="albumpic" id="p1s1" src="snapshot.png" style="width:100%">
+	  </div>
+	  <div class="col-sm-2"></div>
+	  <div class="col-sm-4">
+	    <img class="albumpic" id="p1s2" src="snapshot.png" style="width:100%">
+	  </div>
+	</div>
+	<div class="row albumpeople"> <!-- People2 -->
+	  <div class="col-sm-2">People 2</div>
+	  <div class="col-sm-4">
+	    <img class="albumpic" id="p2s1" src="snapshot.png" style="width:100%">
+	  </div>
+	  <div class="col-sm-2"></div>
+	  <div class="col-sm-4">
+	    <img class="albumpic" id="p2s2" src="snapshot.png" style="width:100%">
+	  </div>
+	</div>
+	<div class="row" albumpeople> <!-- People2 -->
+	  <div class="col-sm-2">People 3</div>
+	  <div class="col-sm-4">
+	    <img class="albumpic" id="p3s1" src="snapshot.png" style="width:100%">
+	  </div>
+	  <div class="col-sm-2"></div>
+	  <div class="col-sm-4">
+	    <img class="albumpic" id="p3s2" src="snapshot.png" style="width:100%">
+	  </div>
+	</div>
+      </div>
+
+      <div class="col-sm-6">
+	<h2 class="text-center">Live Camera</h2>
+	<div id="camera" style="width: 100%;"></div>
+	<!--div class="form-group">
+	  <label for="usr">Client Id:</label>
+	  <input type="text" class="form-control" id="client_id">
+	</div>
+	<div class="form-group">
+	  <label for="pwd">Access Token:</label>
+	  <input type="password" class="form-control" id="access_token">
+	</div-->
+	<button id="startBtn">Start</button>
+	<button id="stopBtn">Stop</button>
+      </div>
+    </div>
+
+
+  </body>
+</html>
