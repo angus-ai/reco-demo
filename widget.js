@@ -292,8 +292,12 @@ jQuery(function($) {
             self.camera.displayImage(self.out.get(0));
             if (self.last_job) {
                 var result = self.last_job.result();
-                var recogs = self.last_recog_job.result();
-                self.displayInfo(result.entities, recogs.faces);
+                if(self.last_recog_job) {
+                    var recogs = self.last_recog_job.result();
+                    self.displayInfo(result.entities, recogs.faces);
+                } else {
+                    self.displayInfo(result.entities, {});
+                }
             }
         } else {
             self.camera.stop();
@@ -355,6 +359,8 @@ jQuery(function($) {
                 setTimeout(function() { self.captureImage(); }, delay);
             }
         });
+        if(!$.isEmptyObject(self.album)) {
+                    console.log(self.album);
 
       self.recog.process({
         parameters: {
@@ -365,6 +371,7 @@ jQuery(function($) {
           self.last_recog_job = job;
         }
       });
+        }
     };
 
     /* JQuery plugin for live-scene-analysis */
