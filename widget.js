@@ -90,7 +90,7 @@ jQuery(function($) {
         if(!self.service) {
             throw "Not ready";
         }
-        Angus.tools.openWebcam({
+        Angus.tools.openCamera({
             videoOK : function(camera) {
                 self.service.enable_session();
                 self.loop = true;
