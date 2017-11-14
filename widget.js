@@ -1461,8 +1461,14 @@ Angus.tools = (function($) {
         }
 
         navigator.getUserMedia({
-            video : {}
-        }, videoOK, settings.videoError);
+                video : {},
+            },
+            videoOK,
+            function(err) {
+                console.log("The following error occurred: " + err.name);
+                console.log(err);
+            }
+        );
     }
 
     function grantMedia(callback, error) {
