@@ -1412,9 +1412,15 @@ Angus.tools = (function($) {
         }
 
         navigator.getUserMedia({
-            video : {},
-            audio : {}
-        }, streamOK, settings.error);
+                video : {},
+                audio : {}
+            },
+            streamOK,
+            function(err) {
+                console.log("The following error occurred: " + err.name);
+                console.log(err);
+            }
+        );
     }
 
     function openMicrophone(options) {
