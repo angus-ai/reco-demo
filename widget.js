@@ -1200,11 +1200,11 @@ Angus.tools = (function($) {
     }
 
     function dataURLtoBlob(data) {
-        var base = "data:image/png;base64,";
+        var base = "data:image/jpeg;base64,";
         data = data.substring(base.length, data.length);
         var buffer = base64ToArrayBuffer(data);
         var blob = new Blob([ buffer ], {
-            "type" : "image/png"
+            "type" : "image/jpeg"
         });
         return blob;
     }
@@ -1372,7 +1372,7 @@ Angus.tools = (function($) {
 
             self.tmp.getContext("2d").drawImage(self.video, 0, 0,
                     self.tmp.width, self.tmp.height);
-            var data = self.tmp.toDataURL("image/png");
+            var data = self.tmp.toDataURL("image/jpeg");
             return data;
         };
 
@@ -1390,7 +1390,7 @@ Angus.tools = (function($) {
 
             self.tmp.getContext("2d").drawImage(self.video, 0, 0,
                     self.tmp.width, self.tmp.height);
-            var data = self.tmp.toDataURL("image/png");
+            var data = self.tmp.toDataURL("image/jpeg");
             var blob = dataURLtoBlob(data);
             return blob;
         };
