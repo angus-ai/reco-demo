@@ -96,6 +96,7 @@ jQuery(function($) {
                 self.loop = true;
                 self.camera = camera;
                 self.captureImage();
+                self.captureImageReco();
                 self.video_loop_id = setInterval(function() { self.videoLoop(); }, 100);
             },
             error : function() {
@@ -314,7 +315,12 @@ jQuery(function($) {
         self.next_snap_pic = pic;
     };
 
-    LiveSceneAnalysis.prototype.captureImage = function() {
+    LiveSceneAnalysis.prototype.nextCaptureImageReco = function() {
+        var self = this;
+        setTimeout(function() { self.captureImageReco(); }, delay);
+    };
+
+    LiveSceneAnalysis.prototype.captureImageReco = function() {
         var self = this;
 
         if(!self.loop) {
@@ -322,6 +328,11 @@ jQuery(function($) {
         }
 
         var blob = self.camera.getBlobImage();
+
+        if(!blob) {
+            self.nextCaptureImageReco();
+            return;
+        }
 
         /* Important for recog */
         if(self.next_snap != null) {
@@ -339,9 +350,41 @@ jQuery(function($) {
               }
             });
         }
+        if(!$.isEmptyObject(self.album)) {
+            self.recog.process({
+                parameters: {
+                    image: blob,
+                    album: self.album
+                },
+                callback: function(job) {
+                    self.last_recog_job = job;
+                    self.nextCaptureImageReco();
+                },
+                error : function() {
+                    self.nextCaptureImageReco();
+                }
+            });
+        } else {
+            self.nextCaptureImageReco();
+        }
+    };
+
+    LiveSceneAnalysis.prototype.nextCaptureImage = function () {
+        var self = this;
+        setTimeout(function() { self.captureImage(); }, 200);
+    };
+
+    LiveSceneAnalysis.prototype.captureImage = function() {
+        var self = this;
+
+        if(!self.loop) {
+            return;
+        }
+
+        var blob = self.camera.getBlobImage();
 
         if(!blob) {
-            setTimeout(function() { self.captureImage(); }, 200);
+            self.nextCaptureImage();
             return;
         }
 
@@ -353,25 +396,12 @@ jQuery(function($) {
             },
             callback : function(job) {
                 self.last_job = job;
-                setTimeout(function() { self.captureImage(); }, delay);
+                self.nextCaptureImage();
             },
             error : function() {
-                setTimeout(function() { self.captureImage(); }, delay);
+                self.nextCaptureImage();
             }
         });
-        if(!$.isEmptyObject(self.album)) {
-                    console.log(self.album);
-
-      self.recog.process({
-        parameters: {
-          image: blob,
-          album: self.album
-        },
-        callback: function(job) {
-          self.last_recog_job = job;
-        }
-      });
-        }
     };
 
     /* JQuery plugin for live-scene-analysis */
