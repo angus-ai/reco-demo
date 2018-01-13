@@ -337,8 +337,6 @@ jQuery(function($) {
         /* Important for recog */
         if(self.next_snap != null) {
             var dataUrl = self.camera.getDataUrlImage();
-            self.next_snap.attr("src", dataUrl);
-            self.next_snap = null;
             self.conn.blobs.create(blob, {
               callback: function(res) {
                 if(!(self.next_snap_id in self.album)) {
@@ -347,6 +345,10 @@ jQuery(function($) {
                 self.album[self.next_snap_id][self.next_snap_pic] = res;
                 self.recog.disable_session();
                 self.recog.enable_session();
+
+                /* Snapshot callback */
+                self.next_snap(dataUrl);
+                self.next_snap = null;
 
                 self.recognize(blob);
               }

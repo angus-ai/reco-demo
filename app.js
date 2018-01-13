@@ -45,7 +45,9 @@ $(function() {
     $("#camera").liveSceneAnalysis("snapshot", {
       id: "People"+people,
       pic: parseInt(pic)-1,
-      target: tgt
+      target: function(dataUrl) {
+        tgt.attr("src", dataUrl);
+      }
     });
   });
 
