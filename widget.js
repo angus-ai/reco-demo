@@ -347,9 +347,17 @@ jQuery(function($) {
                 self.album[self.next_snap_id][self.next_snap_pic] = res;
                 self.recog.disable_session();
                 self.recog.enable_session();
+
+                self.recognize(blob);
               }
             });
+        } else {
+            self.recognize(blob);
         }
+    };
+
+    LiveSceneAnalysis.prototype.recognize = function (blob) {
+        var self = this;
         if(!$.isEmptyObject(self.album)) {
             self.recog.process({
                 parameters: {
