@@ -93,6 +93,7 @@ jQuery(function($) {
         Angus.tools.openCamera({
             videoOK : function(camera) {
                 self.service.enable_session();
+                self.recog.enable_session();
                 self.loop = true;
                 self.camera = camera;
                 self.captureImage();
@@ -110,6 +111,7 @@ jQuery(function($) {
         var self = this;
         self.satisfactions = null;
         self.service.disable_session();
+        self.recog.disable_session();
         self.loop = false;
     };
 
